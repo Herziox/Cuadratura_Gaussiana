@@ -4,14 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cálculos</title>
+    <title>Inicio</title>
     <link rel="icon" href="../img/icono.ico" />
 
     <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/main.css">
-
-    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
 </head>
 
 <body>
@@ -31,100 +29,49 @@
             </div>
             <h4>Redes Sociales</h4>
         </div>
-
-        
-<!-- Programar por Aquiiiiiiiiiiiii -->
-        <div class="cg">
-        <?php
-
-            include 'evaluar.php';
-
-            if(isset($_POST['btnA'])){
-    //INICIO - Declaración de las variables
-                $a =$_POST['a'];
-                $b =$_POST['b'];
-                $n = $_POST['n'];
-                $funcion = $_POST['funcion'];
-                $tol = $_POST['tol'];  
-     //FIN - Declaración de las variables
-
-                $a = validar($a);
-                $b = validar($b);
-    
-                echo "
-                <div id='ggb-element' style='margin: 0 auto'></div>
-                
-                <script>
-                    var ggbApp = new GGBApplet({
-                        'appName': 'graphing',
-                        'showZoomButtons':true,
-                        'height': 300,
-                        'showToolBar': true,
-                        'showAlgebraInput': true,
-                        'showMenuBar': true,
-                        'appletOnLoad': function(api) {
-                        api.evalCommand('Function($funcion,$a,$b)');}}, true);
-                        window.addEventListener('load', function() {
-                            ggbApp.inject('ggb-element');
-                        });
-                </script>
-                ";
-    
-                $fprint = imprimirFunc($funcion);
-                echo "<h2 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>Su función colocada es:<br><span id='formula'>f(x) = $fprint </span><br>en el intervalo [$a , $b]</h2>";
-    
-                $f = validarF($funcion);
-
-    //INICIO - FUNCION DADA
-                eval('function evaluarEn($x){
-                    $h = '.$f.';
-                    return $h;
-                }');
-    //FIN - FUNCIÓN DADA
-
-    //INICIO - MAIN
-
-                $h = ($b-$a)/2;
-                $integral = 0;
-                $integral_1 = 0;
-    
-                $j=3;
-    
-                $integral = $integral_1;
-        
-                $fpl = generarPL($j);
-                eval('function evaluarPL($x){
-                          $h = '.$fpl.';
-                          return $h;
-                      }');
-
-                include 'functions.php';
-    
-                $root = raices(-1,1,$n,$tol);
-                for ($i=0; $i < $j ; $i++) {
-                    echo $root[$i]."<br>";
-                    $pl = (derivadaPL($root[$i]));
-                    $w = 2/((1-(($root[$i])**2))*($pl**2));
-                    $integral_1 += $w*evaluarEn($h*$root[$i] + ($h-$a));
-                }
-                $integral_1=$integral_1*$h;
-
-
-
-                echo "La integral es: $integral";
-    //FIN - MAIN
-
-            }else{
-                    header("Status: 301 Moved Permanently");
-                    header("Location: /404.html");
-                    exit;
-            }
-        ?>
-
+        <div class="contenedor titulos">
+            <h1>Cuadratura Gaussiana</h1>
         </div>
+        <div class="form-all">
+            <h4 class="centrar-texto texto-blancho">INGRESO DE DATOS</h4>
+            <form class="formulario" action="Cuadratura_Gaussiana.php" method="post">
 
+                <div class="recuadro">
+                    <label for="a">Ingrese a (El limite inferior):</label>
+                    <input type="text" class="cuadro" name="a" id="a" placeholder="Por ejemplo: 0" value="-1"
+                        step="0.0000001">
+                    <input type="button" value="π" onclick="colocarPiA()" />
+                </div>
+
+                <div class="recuadro">
+                    <label for="b">Ingrese b (El limite superior):</label>
+                    <input type="text" class="cuadro" name="b" id="b" placeholder="Por ejemplo: 2*π" value="1"
+                        step="0.0000001" />
+                    <input type="button" value="π" onclick="colocarPiB()" />
+                </div>
+
+                <div class="recuadro">
+                    <label for="n">Ingrese n (el número de subintervalos)</label>
+                    <input type="number" name="n" id="n" placeholder="Por ejemplo: 15" value="7">
+                </div>
+
+                <div class="recuadro">
+                    <label for="funcion">Ingrese la función que quiere usar (Considere funciones polinomicas) <br> <span
+                            style="color:red;font-size:2rem;">*</span> f(x) =
+                    </label>
+                    <input type="text" name="funcion" id="funcion" placeholder="x^2 + 2x + 1" value="x">
+                </div>
+
+                <div class="recuadro">
+                    <label for="tol">Tolerancia</label>
+                    <input type="number" name="tol" id="tol" placeholder="0.00001" step="0.0000000001" value="0.1">
+                </div>
+
+                <input class="centrar boton" type="submit" value="Enviar" id="btnA" name="btnA" />
+
+            </form>
+        </div>
     </section>
-
 
     <section class="menu" id="menu">
         <button onclick="cerrar_menu()" style="float: rigth;flex-basis: 4%;font-size:3rem;background-color:#ccc;cursor: pointer;">X</button>
