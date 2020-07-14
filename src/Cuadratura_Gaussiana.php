@@ -58,7 +58,7 @@
                     var ggbApp = new GGBApplet({
                         'appName': 'graphing',
                         'showZoomButtons':true,
-                        'height': 300,
+                        'height': 600,
                         'showToolBar': true,
                         'showAlgebraInput': true,
                         'showMenuBar': true,
