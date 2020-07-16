@@ -92,7 +92,7 @@ function pendienteEn(float $x,float $dx){
 function derivadaPL($x){
     $dx = 1;
     $L = 0;
-    $tolerancia = 0.000000001;
+    $tolerancia = 1e-12;
     do {
         if ($L == 0){
             $pendiente_L_1 = pendienteEn($x,$dx);
