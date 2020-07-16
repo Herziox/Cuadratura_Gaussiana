@@ -88,9 +88,7 @@
                 $integral = 0;
                 $integral_1 = 0;
     
-                $j=3;
-    
-                $integral = $integral_1;
+                $j=5;
         
                 $fpl = generarPL($j);
                 eval('function evaluarPL($x){
@@ -105,13 +103,11 @@
                     echo $root[$i]."<br>";
                     $pl = (derivadaPL($root[$i]));
                     $w = 2/((1-(($root[$i])**2))*($pl**2));
-                    $integral_1 += $w*evaluarEn($h*$root[$i] + ($h-$a));
+                    $integral_1 += $w*evaluarEn($h*$root[$i] + ($h+$a));
                 }
                 $integral_1=$integral_1*$h;
 
-
-
-                echo "La integral es: $integral";
+                echo "La integral es: $integral_1";
     //FIN - MAIN
 
             }else{
