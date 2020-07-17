@@ -1,4 +1,5 @@
 <?php
+//Funcion para la obtencion de raices
 function raicesSecante($x0,$x1,$tolerancia){
     $itmax = ceil(log(($x1-$x0)/$tolerancia)/log(2));
     $i=0;
