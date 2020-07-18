@@ -88,7 +88,7 @@
                 $integral = 0;
                 $integral_1 = 0;
     
-                $j=5;
+                $j=2;
         
                 $fpl = generarPL($j);
                 eval('function evaluarPL($x){
@@ -99,10 +99,11 @@
                 include 'functions.php';
     
                 $root = raices(-1,1,$n,$tol);
-                for ($i=0; $i < count($root) ; $i++) {
+                for ($i=0; $i < $j ; $i++) {
                     $raiz=$root[$i];
                     echo $raiz."<br>";
                     $pl = derivadaPL($raiz);
+                    echo "Derivada de raiz".$raiz."<br>";
                     $w = 2/((1-($raiz**2))*($pl**2));
                     $val = evaluarEn($h*$raiz + ($h+$a));
                     echo "g(x)=".$val."<br>";
