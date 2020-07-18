@@ -69,9 +69,9 @@ function generarPL($n){
 
     for ($i=0; $i <= $n; $i++) { 
         if ($i==0) {
-            $linea = $linea."(c($n,$i)**2)*((".'$x'."+1)**($n-$i))*((".'$x'."-1)**($i))";
+            $linea = $linea."(combinacion($n,$i)**2)*((".'$x'."+1)**($n-$i))*((".'$x'."-1)**($i))";
         }else{
-            $linea = $linea."+(c($n,$i)**2)*((".'$x'."+1)**($n-$i))*((".'$x'."-1)**($i))";
+            $linea = $linea."+(combinacion($n,$i)**2)*((".'$x'."+1)**($n-$i))*((".'$x'."-1)**($i))";
         }
     }
 
