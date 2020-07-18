@@ -1,5 +1,5 @@
 <?php
-//Metodo de obtencion de raices con Secante
+//Funcion para la obtencion de raices
 function raicesSecante($x0,$x1,$tolerancia){
     $itmax = ceil(log(($x1-$x0)/$tolerancia)/log(2));
     $i=0;
@@ -22,7 +22,7 @@ function raicesSecante($x0,$x1,$tolerancia){
     return $valores;
 }
 
-//Metodo de cambio de signo para determinar el rango en donde se encuentra una posible raiz
+
 function raices($a,$b,$n,$tol){
     $h = ($b-$a)/$n;
     $k=1;
@@ -53,14 +53,10 @@ function raices($a,$b,$n,$tol){
         $x_n = $a + $i*$h;
         //
         if(evaluarPL($x_n_1)*evaluarPL($x_n)<0){
-
-            $raiz=raicesSecante($x_n_1,$x_n,$tol)[0];
-            $iteracionRaiz=raicesSecante($x_n_1,$x_n,$tol)[1];
-
             $linea = $linea."<tr><th>$k</th>
-            <td>".$raiz."</td><td>".$iteracionRaiz."</td></tr>";
-            array_push($x,$raiz);
-            $sum+=$iteracionRaiz;
+            <td>".raicesSecante($x_n_1,$x_n,$tol)[0]."</td><td>".raicesSecante($x_n_1,$x_n,$tol)[1]."</td></tr>";
+            array_push($x,raicesSecante($x_n_1,$x_n,$tol)[0]);
+            $sum+=raicesSecante($x_n_1,$x_n,$tol)[1];
             $k++;
             $almenosuno=TRUE;
         }else{
@@ -78,7 +74,7 @@ function raices($a,$b,$n,$tol){
     return $x;
 }
 
-//Funcion factorial
+
 function fact($n){
     $fac = 1;
     for ($i=1; $i <= $n; $i++) { 
@@ -86,17 +82,14 @@ function fact($n){
     }
     return $fac;
 }
-//funcion combinacion
+
 function combinacion($n,$k){
     return fact($n)/(fact($n-$k)*fact($k));
 }
 
-//funcion pendiente
 function pendienteEn(float $x,float $dx){
     return (evaluarPL($x+$dx)-evaluarPL($x-$dx))/(2*$dx);
 }
-
-//Funcion derivada
 function derivadaPL($x){
     $dx = 1;
     $L = 0;
