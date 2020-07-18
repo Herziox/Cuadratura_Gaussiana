@@ -99,11 +99,13 @@
                 include 'functions.php';
     
                 $root = raices(-1,1,$n,$tol);
-                for ($i=0; $i < $j ; $i++) {
+                for ($i=0; $i < count($root) ; $i++) {
                     echo $root[$i]."<br>";
-                    $pl = (derivadaPL($root[$i]));
+                    $pl = derivadaPL($root[$i]);
                     $w = 2/((1-(($root[$i])**2))*($pl**2));
-                    $integral_1 += $w*evaluarEn($h*$root[$i] + ($h+$a));
+                    $val = evaluarEn($h*$root[$i] + ($h+$a));
+                    echo "g(x)=".$val."<br>";
+                    $integral_1 += $w*$val;
                 }
                 $integral_1=$integral_1*$h;
 
