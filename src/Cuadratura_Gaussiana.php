@@ -76,7 +76,7 @@
                 $f = validarF($funcion);
 
     //INICIO - FUNCION DADA
-                eval('function evaluarEn($x){
+               eval('function evaluarEn($x){
                     $h = '.$f.';
                     return $h;
                 }');
@@ -95,18 +95,19 @@
                           $h = '.$fpl.';
                           return $h;
                       }');
-
+                      
                 include 'functions.php';
     
                 $root = raices(-1,1,$n,$tol);
-                for ($i=0; $i < $j ; $i++) {
+                for ($i=0; $i <= $j ; $i++) {
                     $raiz=$root[$i];
                     echo $raiz."<br>";
-                    $pl = (derivadaPL($raiz));
+                    $pl = derivadaPL($raiz);
                     $w = 2/((1-($raiz**2))*($pl**2));
-                    $val = evaluarEn($h*$raiz + ($h+$a));
-                    echo $val."<br>";
+                    $val = $h*$raiz + ($h+$a);
+                    echo "g(x)=".$val."<br>";
                     $integral_1 += $w*$val;
+                    
                 }
                 $integral_1=$integral_1*$h;
 
