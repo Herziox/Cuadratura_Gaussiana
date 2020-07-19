@@ -14,7 +14,7 @@
    <link rel="stylesheet" href="./css/Cuadratura_Gaussiana.css">
    <script src="https://www.geogebra.org/apps/deployggb.js"></script>
     <title>Cuadratura Gaussiana</title>
-
+<script src="./js/Cuadratura_Gaussiana.js"> </script>
 </head>
     
 <body>
@@ -53,14 +53,14 @@
             <div class="flexbox">
                 <div class="recuadro">
                     <label for="validationDefault02" >Limite Inferior</label>
-                    <input type="number" class="form-control" name="a" id="a" placeholder="Por ejemplo: 0" value="-1"
+                    <input type="text" class="form-control" name="a" id="a" placeholder="Por ejemplo: 0" value="-1"
                         step="0.0000001">
                     <input type="button" value="π" onclick="colocarPiA() " class="btn btn-primary"/>
                 </div>
 
                 <div class="recuadro">
                     <label for="validationDefault02"> Limite superior</label>
-                    <input type="number" class="form-control" name="b" id="b" placeholder="Por ejemplo: 2*π" value="1"
+                    <input type="text" class="form-control" name="b" id="b" placeholder="Por ejemplo: 2*π" value="1"
                         step="0.0000001" />
                     <input type="button" value="π" onclick="colocarPiB()" class="btn btn-primary"  />
                 </div>
