@@ -113,7 +113,7 @@
                 }
                 $integral=$h*$integral;
 
-                echo "La integral es: $integral";
+                echo "<h4> La integral es: $integral </h4>";
     //FIN - MAIN
 
             }else{

@@ -18,7 +18,11 @@
 </head>
     
 <body>
+
     <header class="">
+    
+    </header>
+
     <nav class="navbar navbar-dark bg-dark navbar-expand-lg sticky-top">
         
         <a class="navbar-brand btn-outline-success" href="#"> <img src="https://i.imgur.com/c1VjDtt.png" class="img-fluid image-nav"  alt="Responsive image"> Cuadratura Gaussiana </a>
@@ -27,7 +31,7 @@
             <button class="navbar-toggler" type="button" >
                 <span ></span>
             </button>
-        <a class="navbar-brand btn-outline-success" href="#resultados">Tabla de valores</a>
+        <a class="navbar-brand btn-outline-success" href="#grafica">Gráfica</a>
         <button class="navbar-toggler" type="button" >
             <span ></span>
         </button>
@@ -37,11 +41,11 @@
         </button>
             
         </nav>
-    </header>
+
     <div class="title">
             <h1>Cuadratura Gaussiana</h1>
      </div>
-    <section id ="ingresar-datos"class="datos-details">
+    <section id ="ingresarDatos"class="datos-details">
        
         <div class="form-all">
             <h3 class="centrar-texto texto-blancho">INGRESO DE DATOS</h3>
@@ -138,7 +142,11 @@
                 ";
     //Impresion de funcion en notación formal
                 $fprint = imprimirFunc($funcion);
-                echo "<h2 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>
+                echo "
+                <section id='resultados' class='resultados' >
+                <h3> Resultados </h3>
+                <div class='resultados-details'>
+                <h4 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>
                         Su función evaluada es:
                         <br>
                         <span id='formula'>
@@ -146,7 +154,8 @@
                         </span>
                         <br>
                         en el intervalo [$a , $b]
-                    </h2>";
+                    </h4>
+                ";
 
     //Validar Funcion
                 $f = validarF($funcion);
@@ -182,7 +191,9 @@
                 }
                 $integral=$h*$integral;
 
-                echo "La integral es: $integral";
+                echo "<h4>La integral es: $integral</h4>
+                </div>
+                </script>";
     //FIN - MAIN
 
             }else{

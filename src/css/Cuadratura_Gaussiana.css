@@ -71,6 +71,11 @@ button {
 }
 
 .resultados {
+    margin: 20px;
+}
+
+.resultados-details {
+    text-align: center;
     padding: 10px;
     border: 3px solid black;
     border-radius: 10px;
