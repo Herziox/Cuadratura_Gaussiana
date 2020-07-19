@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Bellota:wght@400;700&display=swap" rel="stylesheet" />
    <!-- <link rel="stylesheet" href="../css/main.css"> -->
    <link rel="stylesheet" href="./css/Cuadratura_Gaussiana.css">
+   <script src="https://www.geogebra.org/apps/deployggb.js"></script>
     <title>Cuadratura Gaussiana</title>
 
 </head>
@@ -40,11 +41,11 @@
     <div class="title">
             <h1>Cuadratura Gaussiana</h1>
      </div>
-    <section class="datos-details">
+    <section id ="ingresar-datos"class="datos-details">
        
         <div class="form-all">
-            <h4 class="centrar-texto texto-blancho">INGRESO DE DATOS</h4>
-            <form class="formulario" action="Cuadratura_Gaussiana.php" method="post">
+            <h3 class="centrar-texto texto-blancho">INGRESO DE DATOS</h3>
+            <form class="formulario" action="" method="post">
             <div class="flexbox">
                 <div class="recuadro">
                     <label for="validationDefault02" >Limite Inferior</label>
@@ -92,6 +93,107 @@
 
             </form>
         </div>
+        
+    </section>
+
+    <!-- Programar por Aquiiiiiiiiiiiii -->
+   
+        <?php
+
+            include 'evaluar.php';
+
+            if(isset($_POST['btnA'])){
+    //INICIO - Declaración de las variables
+                $a =$_POST['a'];
+                $b =$_POST['b'];
+                $n = $_POST['n'];
+                $funcion = $_POST['funcion'];
+                $tol = $_POST['tol'];  
+     //FIN - Declaración de las variables
+
+     //Validacion de extremos
+                $a = validar($a);
+                $b = validar($b);
+    // Graficadora de Geogebra
+                echo "
+                <section id='grafica' class='margen'>
+                <h3> Gráfica de la función</h3>
+                <div id='ggb-element' style='margin: 0 auto'></div>
+                
+                    <script>
+                        var ggbApp = new GGBApplet({
+                            'appName': 'graphing',
+                            'showZoomButtons':true,
+                            'height': 500,
+                            'showToolBar': true,
+                            'showAlgebraInput': true,
+                            'showMenuBar': true,
+                            'appletOnLoad': function(api) {
+                            api.evalCommand('Function($funcion,$a,$b)');}}, true);
+                            window.addEventListener('load', function() {
+                                ggbApp.inject('ggb-element');
+                            });
+                    </script>
+                </section>
+                ";
+    //Impresion de funcion en notación formal
+                $fprint = imprimirFunc($funcion);
+                echo "<h2 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>
+                        Su función evaluada es:
+                        <br>
+                        <span id='formula'>
+                            f(x) = $fprint 
+                        </span>
+                        <br>
+                        en el intervalo [$a , $b]
+                    </h2>";
+
+    //Validar Funcion
+                $f = validarF($funcion);
+
+    //INICIO - FUNCION DADA
+               eval('function evaluarEn($x){
+                    $h = '.$f.';
+                    return $h;
+                }');
+    //FIN - FUNCIÓN DADA
+
+    //INICIO - MAIN
+
+                $h = ($b-$a)/2;        
+                $integral = 0;
+                $j=2;
+        
+                $fpl = generarPL($j);
+                eval('function evaluarPL($x){
+                          $h = '.$fpl.';
+                          return $h;
+                      }');
+                      
+                include 'functions.php';
+    
+                $root = raices(-1,1,$n,$tol);
+                for ($i=0; $i < count($root) ; $i++) {
+                    $raiz=$root[$i];
+                    $pl = derivadaPL($raiz);
+                    $w = 2/((1-($raiz**2))*($pl**2));
+                    $integral += $w*evaluarEn($h*$raiz + ($h+$a));
+                    
+                }
+                $integral=$h*$integral;
+
+                echo "La integral es: $integral";
+    //FIN - MAIN
+
+            }else{
+                    header("Status: 301 Moved Permanently");
+                    header("Location: /404.html");
+                    exit;
+            }
+        ?>
+
+       
+
     </section>
 
     <footer id="footer" class="bg-dark footer" >
