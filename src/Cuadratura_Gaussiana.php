@@ -15,10 +15,7 @@
 </head>
 
 <body>
-    <header class="head-page">
-        <div class="contenedor">
-        </div>
-    </header>
+    
 
     <section class="contenido-header">
         <div class="barra-sup">
@@ -48,9 +45,10 @@
                 $tol = $_POST['tol'];  
      //FIN - Declaración de las variables
 
+     //Validacion de extremos
                 $a = validar($a);
                 $b = validar($b);
-    
+    // Graficadora de Geogebra
                 echo "
                 <div id='ggb-element' style='margin: 0 auto'></div>
                 
@@ -69,10 +67,19 @@
                         });
                 </script>
                 ";
-    
+    //Impresion de funcion en notación formal
                 $fprint = imprimirFunc($funcion);
-                echo "<h2 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>Su función colocada es:<br><span id='formula'>f(x) = $fprint </span><br>en el intervalo [$a , $b]</h2>";
-    
+                echo "<h2 class='centrar-texto' style='padding: 1rem 0 1rem 0;'>
+                        Su función colocada es:
+                        <br>
+                        <span id='formula'>
+                            f(x) = $fprint 
+                        </span>
+                        <br>
+                        en el intervalo [$a , $b]
+                    </h2>";
+
+    //Validar Funcion
                 $f = validarF($funcion);
 
     //INICIO - FUNCION DADA
@@ -84,11 +91,9 @@
 
     //INICIO - MAIN
 
-                $h = ($b-$a)/2;
+                $h = ($b-$a)/2;        
                 $integral = 0;
-                $integral_1 = 0;
-    
-                $j=5;
+                $j=2;
         
                 $fpl = generarPL($j);
                 eval('function evaluarPL($x){
@@ -101,17 +106,14 @@
                 $root = raices(-1,1,$n,$tol);
                 for ($i=0; $i < count($root) ; $i++) {
                     $raiz=$root[$i];
-                    echo $raiz."<br>";
                     $pl = derivadaPL($raiz);
                     $w = 2/((1-($raiz**2))*($pl**2));
-                    $val = evaluarEn($h*$raiz + ($h+$a));
-                    echo "g(x)=".$val."<br>";
-                    $integral_1 += $w*$val;
+                    $integral += $w*evaluarEn($h*$raiz + ($h+$a));
                     
                 }
-                $integral_1=$integral_1*$h;
+                $integral=$h*$integral;
 
-                echo "La integral es: $integral_1";
+                echo "La integral es: $integral";
     //FIN - MAIN
 
             }else{
