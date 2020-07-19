@@ -53,14 +53,14 @@
             <div class="flexbox">
                 <div class="recuadro">
                     <label for="validationDefault02" >Limite Inferior</label>
-                    <input type="text" class="form-control" name="a" id="a" placeholder="Por ejemplo: 0" value="-1"
+                    <input type="text" class="form-control" name="a" id="a" placeholder="Por ejemplo: 0" value="<?php if (isset($_POST['a'])) echo $_POST['a']; else echo "-10"; ?>"
                         step="0.0000001">
                     <input type="button" value="π" onclick="colocarPiA() " class="btn btn-primary"/>
                 </div>
 
                 <div class="recuadro">
                     <label for="validationDefault02"> Limite superior</label>
-                    <input type="text" class="form-control" name="b" id="b" placeholder="Por ejemplo: 2*π" value="1"
+                    <input type="text" class="form-control" name="b" id="b" placeholder="Por ejemplo: 2*π" value="<?php if (isset($_POST['b'])) echo $_POST['b']; else echo "10"; ?>"
                         step="0.0000001" />
                     <input type="button" value="π" onclick="colocarPiB()" class="btn btn-primary"  />
                 </div>
@@ -69,7 +69,7 @@
                 <div class="col-md-12 mb-3">
             
                 <label for="validationDefault02"> Número de subintervalos</label>
-                <input class="form-control"  type="number" name="n" id="n" placeholder="Por ejemplo: 15" value="7">
+                <input class="form-control"  type="number" name="n" id="n" placeholder="Por ejemplo: 15"value="<?php if (isset($_POST['n'])) echo $_POST['n']; else echo "100"; ?>">
                 </div>
             </div>
 
@@ -78,14 +78,14 @@
                 <label for="validationDefault02">Función <br> <span
                             style="color:red;font-size:2rem;">*</span> f(x) =
                     </label>
-                    <input class="form-control"  type="text" name="funcion" id="funcion" placeholder="x^2 + 2x + 1" value="x">
+                    <input class="form-control"  type="text" name="funcion" id="funcion" placeholder="x^2 + 2x + 1" required value="<?php if (isset($_POST['funcion'])) echo $_POST['funcion']; else echo "x*x-6"; ?>">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="col-md-12 mb-3">
                 <label for="validationDefault02">Tolerancia</label>
-                    <input class="form-control"  type="number" name="tol" id="tol" placeholder="0.00001" step="0.0000000001" value="0.1">
+                    <input class="form-control"  type="number" name="tol" id="tol" placeholder="0.00001" step="0.0000000001" value="<?php if (isset($_POST['tol'])) echo $_POST['tol']; else echo "0.001"; ?>">
                 </div>
             </div>
 
