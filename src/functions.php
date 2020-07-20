@@ -30,17 +30,18 @@ function raices($a,$b,$n,$tol){
     $sum = 0;
     $x = array();
     
-    $linea="<table class='egt'>
+    $linea="<table class='table'>
+    <thead class='thead-dark'>
     <tr class='primeraFila'>
-        <th></th>
-        <td colspan='2'>Raices de la función</td>
+        <th colspan='3'>Raices de la función</th>
     </tr>
     
     <tr>
         <th>N</th>
-        <td>Punto</td>
-        <td>Iteraciones</td>
+        <th>Punto</th>
+        <th>Iteraciones</th>
     </tr>
+    </thead>
     ";
 
     for($i=1; $i <= $n; $i++) {
