@@ -133,7 +133,7 @@
                             'showAlgebraInput': true,
                             'showMenuBar': true,
                             'appletOnLoad': function(api) {
-                            api.evalCommand('Function($funcion,$a,$b)');}}, true);
+                            api.evalCommand('Integral($funcion,$a,$b)');}}, true);
                             window.addEventListener('load', function() {
                                 ggbApp.inject('ggb-element');
                             });
