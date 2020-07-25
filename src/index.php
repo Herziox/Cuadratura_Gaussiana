@@ -191,10 +191,10 @@
                     $raiz=$root[$i];
                    
                     $pl = derivadaPL($raiz);
-                    echo "Derivada $pl <br>";
+                   
                     $w = 2/((1-($raiz**2))*($pl**2));
                     $integral += $w*evaluarEn($h*$raiz + ($h+$a));
-                    echo "Integral $integral <br>";
+                  
                 }
                 $integral=$h*$integral;
 
