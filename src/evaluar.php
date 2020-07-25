@@ -74,7 +74,7 @@ function generarPL($n){
             $linea = $linea."+(combinacion($n,$i)**2)*((".'$x'."+1)**($n-$i))*((".'$x'."-1)**($i))";
         }
     }
-
+    echo "Polinomio:  $linea <br>";
     return $linea.")";
 }
 

@@ -66,10 +66,13 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-12 mb-3">
-            
+                <div class="col-md-6 mb-3">
                 <label for="validationDefault02"> Número de subintervalos</label>
                 <input class="form-control"  type="number" name="n" id="n" placeholder="Por ejemplo: 15"value="<?php if (isset($_POST['n'])) echo $_POST['n']; else echo "100"; ?>">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="validationDefault02"> Grados de los polinomios de legendre</label>
+                <input class="form-control"  type="number" name="grado" id="grado" placeholder="Por ejemplo: 15"value="<?php if (isset($_POST['grado'])) echo $_POST['grado']; else echo "2"; ?>">
                 </div>
             </div>
 
@@ -104,15 +107,17 @@
    
         <?php
 
-            include 'evaluar.php';
+           
 
             if(isset($_POST['btnA'])){
     //INICIO - Declaración de las variables
+    include 'evaluar.php';
                 $a =$_POST['a'];
                 $b =$_POST['b'];
                 $n = $_POST['n'];
                 $funcion = $_POST['funcion'];
                 $tol = $_POST['tol'];  
+                $grado = $_POST['grado']; 
      //FIN - Declaración de las variables
 
      //Validacion de extremos
@@ -171,9 +176,9 @@
 
                 $h = ($b-$a)/2;        
                 $integral = 0;
-                $j=2;
+                //$grado=3;
         
-                $fpl = generarPL($j);
+                $fpl = generarPL($grado);
                 eval('function evaluarPL($x){
                           $h = '.$fpl.';
                           return $h;
@@ -184,10 +189,12 @@
                 $root = raices(-1,1,$n,$tol);
                 for ($i=0; $i < count($root) ; $i++) {
                     $raiz=$root[$i];
+                   
                     $pl = derivadaPL($raiz);
+                    echo "Derivada $pl <br>";
                     $w = 2/((1-($raiz**2))*($pl**2));
                     $integral += $w*evaluarEn($h*$raiz + ($h+$a));
-                    
+                    echo "Integral $integral <br>";
                 }
                 $integral=$h*$integral;
 

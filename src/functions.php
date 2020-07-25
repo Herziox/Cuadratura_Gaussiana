@@ -15,8 +15,8 @@ function raicesSecante($x0,$x1,$tolerancia){
         return "Error";
     }
 
-    $factor = pow(10, 8);
-    $x1 = round($x1*$factor)/$factor;
+    $factorialor = pow(10, 8);
+    $x1 = round($x1*$factorialor)/$factorialor;
 
     $valores = [$x1,$i];
     return $valores;
@@ -54,6 +54,7 @@ function raices($a,$b,$n,$tol){
         $x_n = $a + $i*$h;
         //
         if(evaluarPL($x_n_1)*evaluarPL($x_n)<0){
+            
             $linea = $linea."<tr><th>$k</th>
             <td>".raicesSecante($x_n_1,$x_n,$tol)[0]."</td><td>".raicesSecante($x_n_1,$x_n,$tol)[1]."</td></tr>";
             array_push($x,raicesSecante($x_n_1,$x_n,$tol)[0]);
@@ -76,7 +77,7 @@ function raices($a,$b,$n,$tol){
 }
 
 
-function fact($n){
+function factorial($n){
     $fac = 1;
     for ($i=1; $i <= $n; $i++) { 
         $fac *= $i;
@@ -85,25 +86,24 @@ function fact($n){
 }
 
 function combinacion($n,$k){
-    return fact($n)/(fact($n-$k)*fact($k));
+    return factorial($n)/(factorial($n-$k)*factorial($k));
 }
 
 function pendienteEn(float $x,float $dx){
+   
+    $val =(evaluarPL($x+$dx)-evaluarPL($x-$dx))/(2*$dx);
+   // echo "Valor de la funcion: $val | Raiz= $x<br>";
     return (evaluarPL($x+$dx)-evaluarPL($x-$dx))/(2*$dx);
 }
 function derivadaPL($x){
-    $dx = 1;
-    $L = 0;
-    $tolerancia = 1e-12;
+    $dx = 1; 
+    $tolerancia = 1e-7;
+    $pendiente_L = pendienteEn($x,$dx);
     do {
-        if ($L == 0){
-            $pendiente_L_1 = pendienteEn($x,$dx);
-        }else{
-            $pendiente_L_1 = $pendiente_L;
-        }
+        $pendiente_L_1 = $pendiente_L;
         $dx/=2;
         $pendiente_L = pendienteEn($x,$dx);
-        $L++;
+        
     } while (abs($pendiente_L-$pendiente_L_1)>$tolerancia);
     return $pendiente_L;
 }
